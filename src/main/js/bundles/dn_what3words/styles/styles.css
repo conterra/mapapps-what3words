@@ -30,10 +30,6 @@
     margin: 0;
 }
 
-/*.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode {*/
-/*    background-color: #fff !important;*/
-/*}*/
-
 .ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .ctToolIcon_popupToggleTool {
     height: 47px;
     width: 47px;
@@ -45,5 +41,11 @@
     display: block;
     font-size: 15px;
     color: #45474d;
+}
+
+.ctAppRoot .ctActiveTool .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText {
+    display: block;
+    font-size: 15px;
+    color: #fff;
 }
 
