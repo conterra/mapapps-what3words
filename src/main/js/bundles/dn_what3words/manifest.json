@@ -26,7 +26,8 @@
             "provides": "what3words.What3wordsModel",
             "propertiesConstructor": true,
             "properties": {
-                "apiKey": ""
+                "apiKey": "",
+                "what3wordsUrl": "https://api.what3words.com/v3/convert-to-3wa"
             }
         },
         {
@@ -96,14 +97,21 @@
             "propertiesConstructor": true,
             "references": [
                 {
-                    "name": "mapWidgetModel",
+                    "name": "_mapWidgetModel",
                     "providing": "map-widget.MapWidgetModel"
                 },
                 {
-                    "name": "what3wordsModel",
+                    "name": "_what3wordsModel",
                     "providing": "what3words.What3wordsModel"
                 }
             ]
         }
+        // ,
+        // {
+        //     "name": "PopupActionCopyWhat3WordsFactory",
+        //     "provides": [
+        //         "popups.ActionFactory"
+        //     ]
+        // }
     ]
 }

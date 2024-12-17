@@ -15,13 +15,18 @@
  */
 module.exports = {
     root: ({
-        tool: {
-            tooltip: "w3w Adresse in der Karte identifizieren",
-            title: "w3w Adresse in der Karte identifizieren"
-        },
-        popup: {
-            button: "Kopiere Adresse",
-            tooltip: "Kopiert"
+        ui: {
+            missingApiKeyWarning: "API Schlüssel für what3words fehlt",
+            tool: {
+                tooltip: "w3w Adresse in der Karte identifizieren",
+                title: "w3w Adresse in der Karte identifizieren"
+            },
+            popup: {
+                button: "Kopiere Adresse",
+                tooltip: "Kopiert",
+                coordinatePrefix: "what3words für",
+                geocodingErrorPrefix: "Geokodierung fehlgeschlagen"
+            }
         }
     })
 };

@@ -18,7 +18,7 @@ import Locale from "apprt-core/Locale";
 
 const coordsUrl = "https://api.what3words.com/v3/convert-to-3wa";
 
-function MapClickPopupHandler(i18n) {
+function MakPopupHandler(i18n) {
 
     let _clickHandle;
     let mapWidgetModel;
@@ -67,6 +67,7 @@ function MapClickPopupHandler(i18n) {
 
             function copyText() {
                 const copyText = document.getElementsByClassName("popupTitle")[0];
+                if (!copyText) { return; }
                 navigator.clipboard.writeText(copyText.textContent);
                 const tooltip = document.getElementsByClassName("tooltiptext")[0];
                 tooltip.style.visibility = "visible";

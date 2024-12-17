@@ -15,13 +15,17 @@
  */
 module.exports = {
     root: ({
-        tool: {
-            tooltip: "Identify w3w address in the map",
-            title: "Identify w3w address in the map"
-        },
-        popup: {
-            button: "Copy Adress",
-            tooltip: "Copied"
+        ui: {
+            missingApiKeyWarning: "API key for what3words is empty",
+            tool: {
+                tooltip: "Identify w3w address in the map",
+                title: "Identify w3w address in the map"
+            },
+            popup: {
+                button: "Copy Adress",
+                tooltip: "Copied",
+                coordinatePrefix: "what3words for"
+            }
         }
     }),
     de: true
