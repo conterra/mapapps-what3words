@@ -13,19 +13,22 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 ///
+
 import apprt_request from "apprt-request";
 import Locale from "apprt-core/Locale";
 
-import { InjectedReference } from "apprt-core/InjectedReference";
+import type { InjectedReference } from "apprt-core/InjectedReference";
+import type { Messages } from "./nls/bundle";
+import type { I18N } from "apprt/api";
 
-export default class MapClickPopupHandler {
-    private _i18n: InjectedReference<any>;
-    private _clickHandle?: __esri.EventHandler;
+export class MapClickPopupHandler {
+    private _i18n: InjectedReference<I18N<Messages>>;
+    private _clickHandle?: IHandle;
     private _mapWidgetModel: InjectedReference<any>;
-    private _what3wordsModel: InjectedReference<any>;
+    private _what3WordsModel: InjectedReference<any>;
 
     public activateTool(): void {
-        const i18n = this._i18n.get().ui;
+        const i18n = this._i18n!.get().ui;
         this.getView().then((view) => {
             this.addClickHandler(view, i18n);
         });
@@ -42,8 +45,8 @@ export default class MapClickPopupHandler {
         });
     }
 
-    private addClickHandler(view: __esri.View, i18n: InjectedReference<Messages>) {
-        const w3wModel = this._what3wordsModel;
+    private addClickHandler(view: __esri.View, i18n: Messages["ui"]) {
+        const w3wModel = this._what3WordsModel;
         const key = w3wModel.apiKey;
         const coordsUrl = w3wModel.what3wordsUrl;
 
@@ -82,7 +85,7 @@ export default class MapClickPopupHandler {
             if (mapWidgetModel.view) {
                 resolve(mapWidgetModel.view);
             } else {
-                const watcher = mapWidgetModel.watch("view", ({ value: view }) => {
+                const watcher = mapWidgetModel.watch("view", ({ value: view }: { value: __esri.MapView | __esri.SceneView }) => {
                     watcher.remove();
                     resolve(view);
                 });

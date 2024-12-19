@@ -12,18 +12,22 @@
         "esri": "^4.10.1",
         "apprt-core": "^4.6.2",
         "apprt-binding": "^4.6.2",
+        "apprt-request": "^4.6.2",
         "ct": "^4.6.2",
-        "omnisearch": "^4.6.2"
+        "store-api": "^4.6.2"
     },
-    "CSS-Themes-Extension": [{
-        "name": "*",
-        "files": ["styles/styles.css"]
-    }],
+    "cssThemesExtension": [
+        {
+            "name": "*",
+            "files": [
+                "styles/styles.css"
+            ]
+        }
+    ],
     "components": [
         {
             "name": "Config",
-            "impl": "./What3wordsModel",
-            "provides": "what3words.What3wordsModel",
+            "provides": "dn_what3words.What3WordsModel",
             "propertiesConstructor": true,
             "properties": {
                 "apiKey": "",
@@ -31,11 +35,10 @@
             }
         },
         {
-            "name": "What3wordsStoreFactory",
+            "name": "What3WordsStoreFactory",
             "properties": {
-                "id": "What3wordsStore",
                 "useIn": [
-                    "omnisearch"
+                    "search"
                 ],
                 "omniSearchTypingDelay": 200,
                 "omniSearchPageSize": 20,
@@ -48,22 +51,38 @@
                     "suggestContains": true
                 }
             },
-            "references": [{
-                "name": "model",
-                "providing": "what3words.What3wordsModel"
-            }]
+            "references": [
+                {
+                    "name": "_model",
+                    "providing": "dn_what3words.What3WordsModel"
+                }
+            ]
         },
         {
-            "name": "PopupOmnisearchHandler",
-            "provides": ["ct.api.omnisearch.ResultHandler"],
-            "properties": {
-                "id": "PopupHandler",
-                "type": ["select", "clear"]
-            },
-            "references": [{
-                "name": "model",
-                "providing": "map-widget.MapWidgetModel"
-            }]
+            "name": "What3WordsPopupAction",
+            "provides": "map-actions.Action",
+            "immediate": true,
+            "properties": {},
+            "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                },
+                {
+                    "name": "_actionService",
+                    "providing": "map-actions.ActionService"
+                },
+                {
+                    "name": "_what3WordsModel",
+                    "providing": "dn_what3words.What3WordsModel"
+                },
+                {
+                    "name": "_what3WordsStore",
+                    "providing": "ct.api.Store",
+                    "filter": "(id='what3wordsStore')",
+                    "cardinality": "0..1"
+                }
+            ]
         },
         {
             "name": "PopupToggleTool",
@@ -85,14 +104,14 @@
             "references": [
                 {
                     "name": "handlerScope",
-                    "providing": "editing.MapClickPopupHandler"
+                    "providing": "dn_what3words.MapClickPopupHandler"
                 }
             ]
         },
         {
             "name": "MapClickPopupHandler",
             "provides": [
-                "editing.MapClickPopupHandler"
+                "dn_what3words.MapClickPopupHandler"
             ],
             "propertiesConstructor": true,
             "references": [
@@ -101,17 +120,16 @@
                     "providing": "map-widget.MapWidgetModel"
                 },
                 {
-                    "name": "_what3wordsModel",
-                    "providing": "what3words.What3wordsModel"
+                    "name": "_what3WordsModel",
+                    "providing": "dn_what3words.What3WordsModel"
                 }
             ]
+        },
+        {
+            "name": "PopupActionCopyWhat3WordsFactory",
+            "provides": [
+                "popups.ActionFactory"
+            ]
         }
-        // ,
-        // {
-        //     "name": "PopupActionCopyWhat3WordsFactory",
-        //     "provides": [
-        //         "popups.ActionFactory"
-        //     ]
-        // }
     ]
 }

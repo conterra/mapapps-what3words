@@ -16,7 +16,7 @@
 
 import { InjectedReference } from "apprt-core/InjectedReference";
 
-export default class PopupActionCopyWhat3WordsFactory {
+export class PopupActionCopyWhat3WordsFactory {
     private _properties: InjectedReference<any>;
 
     public createAction(type: string): any {
