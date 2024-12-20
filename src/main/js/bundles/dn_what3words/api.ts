@@ -14,23 +14,30 @@
 /// limitations under the License.
 ///
 
-import { Messages } from "../bundle";
+export interface What3WordsQueryReturnObject {
+    geometry: __esri.Geometry;
+    id: string;
+    title: string;
+}
 
-export default {
-    bundleName: "What3Words",
-    bundleDescription: "tbd",
-    ui: {
-        missingApiKeyWarning: "API Schlüssel für what3words fehlt",
-        noPlace: "Kein Ort",
-        tool: {
-            tooltip: "w3w Adresse in der Karte identifizieren",
-            title: "w3w Adresse in der Karte identifizieren"
+export interface What3WordsQueryResult {
+    coordinates: {
+        lat: number;
+        lng: number;
+    }
+    country: string;
+    language: string;
+    map: string;
+    nearestPlace: string;
+    square: {
+        southwest: {
+            lat: number;
+            lng: number;
         },
-        popup: {
-            button: "Kopiere Adresse",
-            tooltip: "Kopiert",
-            coordinatePrefix: "what3words für",
-            geocodingErrorPrefix: "Geokodierung fehlgeschlagen"
+        northeast: {
+            lat: number;
+            lng: number;
         }
     }
-} satisfies Messages;
+    words: string;
+}

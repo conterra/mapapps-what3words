@@ -31,7 +31,9 @@
             "propertiesConstructor": true,
             "properties": {
                 "apiKey": "",
-                "what3wordsUrl": "https://api.what3words.com/v3/convert-to-3wa"
+                "what3wordsUrl": "https://api.what3words.com/v3/convert-to-3wa",
+                "suggestUrl": "https://api.what3words.com/v3/autosuggest",
+                "coordsUrl": "https://api.what3words.com/v3/convert-to-coordinates"
             }
         },
         {
@@ -75,12 +77,6 @@
                 {
                     "name": "_what3WordsModel",
                     "providing": "dn_what3words.What3WordsModel"
-                },
-                {
-                    "name": "_what3WordsStore",
-                    "providing": "ct.api.Store",
-                    "filter": "(id='what3wordsStore')",
-                    "cardinality": "0..1"
                 }
             ]
         },

@@ -14,9 +14,12 @@
 /// limitations under the License.
 ///
 
+import { InjectedReference } from "apprt-core/InjectedReference";
 import { What3WordsStore } from "./What3WordsStore";
+import { MessagesReference } from "./nls/bundle";
 
 export class What3WordsStoreFactory {
+    private _i18n: InjectedReference<MessagesReference>;
     private _model: any;
     private _properties: any;
     private _registration: any;
@@ -28,9 +31,15 @@ export class What3WordsStoreFactory {
 
     private initStore() {
         const props = this._properties;
-        props.apiKey = this._model.get("apiKey");
-        const store = new What3WordsStore(props);
-        this._registration = this._componentContext.getBundleContext().registerService(["ct.api.Store"], store, props);
+        const model = this._model;
+        const _i18n = this._i18n!.get().ui;
+
+        props.apiKey = model.get("apiKey");
+
+        const store = new What3WordsStore(props, model, _i18n); // TODO: Typing
+        this._registration = this._componentContext.getBundleContext().registerService(
+            ["ct.api.Store"], store, { ...props, id: "what3wordsStore" }
+        );
     }
 
     public deactivate(): void {

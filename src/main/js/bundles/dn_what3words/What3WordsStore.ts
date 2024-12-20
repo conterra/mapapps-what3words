@@ -17,23 +17,32 @@
 import QueryResults from "store-api/QueryResults";
 import apprt_request from "apprt-request";
 import when from "apprt-core/when";
-import ComplexQuery from "store-api/ComplexQuery";
+import ComplexQuery, { ComplexQueryOptions } from "store-api/ComplexQuery";
 import Point from "esri/geometry/Point";
+import { What3WordsQueryResult, What3WordsQueryReturnObject } from "./api";
+import { QueryOptions, QueryResult } from "store-api/api/Store";
+import What3WordsModel from "./What3WordsModel";
+import { InjectedReference } from "apprt-core/InjectedReference";
+import { Messages } from "./nls/bundle";
 
-const coordsUrl = "https://api.what3words.com/v3/convert-to-coordinates";
-const suggestUrl = "https://api.what3words.com/v3/autosuggest";
 // eslint-disable-next-line max-len
 const regex = /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i;
 
 export class What3WordsStore {
+    private _i18n: Messages;
+    private key: string;
+    private id: string;
+    private _model: InjectedReference<typeof What3WordsModel>;
 
-    constructor(properties) {
+    constructor(properties: Record<string, any>, _model: typeof What3WordsModel, _i18n: Messages) {
         this.key = properties.apiKey;
         this.id = "what3wordsStore";
+        this._model = _model;
+        this._i18n = _i18n;
     }
 
-    get(id, options) {
-        const query = {};
+    public get(id: string, options: any): Promise<What3WordsQueryReturnObject> {
+        const query = {} as {id: ComplexQueryOptions};
         query["id"] = { $eq: id };
         options.isGet = true;
         return when(this.query(query, options), function (features) {
@@ -41,17 +50,18 @@ export class What3WordsStore {
         });
     }
 
-    getIdentity(item) {
+    public getIdentity(item: What3WordsQueryReturnObject): string {
         return item["id"];
     }
 
-    getMetadata() {
+    public getMetadata(): { supportsGeometry: boolean } {
         return {
             supportsGeometry: true
         };
     }
 
-    query(query, queryopts) {
+    public query(query: any, queryopts: QueryOptions): QueryResult<What3WordsQueryReturnObject> {
+        const model = this._model;
 
         const ast = ComplexQuery.parse(query, queryopts).ast;
         let value = ast.root().v;
@@ -73,13 +83,13 @@ export class What3WordsStore {
         }
 
         const queryParams = { key };
-        let targetUrl = suggestUrl;
+        let targetUrl = model.suggestUrl;
         let callback = this.suggestCallback;
 
         //if this.query() was called from this.get(), otherwise it is a suggest query
         if (queryopts.isGet === true) {
             queryParams.words = value;
-            targetUrl = coordsUrl;
+            targetUrl = model.coordsUrl;
             callback = this.getCallback;
         } else {
             queryParams.input = value;
@@ -91,6 +101,7 @@ export class What3WordsStore {
                 return this.emptyResult();
             })
         );
+
         return QueryResults(promise);
     }
 
@@ -99,7 +110,7 @@ export class What3WordsStore {
         response.suggestions.forEach((suggest) => {
             results.push({
                 id: suggest.words,
-                title: `///${suggest.words} (${suggest.nearestPlace}`
+                title: `///${suggest.words} (${suggest.nearestPlace || this._i18n.noPlace})` // TODO get i18n to work
             });
         });
 
@@ -107,7 +118,7 @@ export class What3WordsStore {
         return results;
     }
 
-    private getCallback(response) {
+    private getCallback(response: What3WordsQueryResult) {
         const results = [];
 
         const coordinate = new Point({

@@ -18,7 +18,9 @@ import { Mutable, properties, type Mutable as MutableType } from "apprt-core/Mut
 
 function defineProperties<Impl, P>(mutableDefinition: any, mutableProperties: {
     apiKey: "",
-    what3wordsUrl: ""
+    what3wordsUrl: "",
+    suggestUrl: "",
+    coordsUrl: ""
 }): Impl & MutableType<P> {
     properties(mutableDefinition, mutableProperties);
     return mutableDefinition;
@@ -29,11 +31,15 @@ class What3WordsModel extends Mutable {
 
 interface What3WordsModelProps {
     apiKey: string,
-    what3wordsUrl: string
+    what3wordsUrl: string,
+    suggestUrl: string,
+    coordsUrl: string
 }
 
 export default defineProperties<What3WordsModel, What3WordsModelProps>(What3WordsModel,
     {
         apiKey: "",
-        what3wordsUrl: ""
+        what3wordsUrl: "",
+        suggestUrl: "",
+        coordsUrl: ""
     });

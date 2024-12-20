@@ -21,7 +21,7 @@ export class What3WordsPopupAction {
     private id: string;
     private immediate: boolean;
     private _what3WordsStore: InjectedReference<any>; //TODO: Improve
-    private _what3wordsModel: InjectedReference<typeof Config>; //TODO: Improve
+    private _what3WordsModel: InjectedReference<typeof Config>; //TODO: Improve
     private _actionService: InjectedReference<any>; //TODO: Improve
 
     constructor() {
@@ -30,16 +30,28 @@ export class What3WordsPopupAction {
     }
 
     async trigger(event: any): Promise<void> {
-        const model = this._what3wordsModel;
-        const store = this._what3WordsStore;
+        const model = this._what3WordsModel;
         const actionService = this._actionService;
 
+        if (!event.source) { return; }
         if (event.source.id !== "what3wordsStore" || !event.items || event.items.length === 0) { return; }
+        event.source.popupTemplate = {
+            "title": `///${event.items[0].title}`,
+            "popupType": "default",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Dieser Baum wurde im Jahr <strong>{pflanzjahr}</strong> gepflanzt."
+                }
+            ],
+            "customActions": ["popup-action-copy-what3words"]
+        };
+
         const item = event.items[0];
         actionService.trigger(["zoomto", "highlight", "openpopup"], {
             "items": [item],
             "zoomto-point-scale": 1000,
-            "source": store
+            "source": event.source
         });
     }
 }

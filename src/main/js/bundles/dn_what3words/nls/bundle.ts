@@ -20,6 +20,7 @@ const i18n = {
         bundleDescription: "tbd",
         ui: {
             missingApiKeyWarning: "API key for what3words is empty",
+            noPlace: "No Place",
             tool: {
                 tooltip: "Identify w3w address in the map",
                 title: "Identify w3w address in the map"
