@@ -25,8 +25,8 @@ export class PopupActionCopyWhat3WordsFactory {
         return {
             id: type,
             type: "button",
-            title: properties.popupActionTitle,
-            className: properties.iconClass,
+            title: "test",
+            className: "icon-star",
 
             trigger(context: any): void {
                 console.info("Triggered");

@@ -37,8 +37,17 @@ export class What3WordsStoreFactory {
         props.apiKey = model.get("apiKey");
 
         const store = new What3WordsStore(props, model, _i18n); // TODO: Typing
+        // todo action hier
+
+        const getW3WAction = this.getW3WAction();
+
         this._registration = this._componentContext.getBundleContext().registerService(
-            ["ct.api.Store"], store, { ...props, id: "what3wordsStore" }
+            ["ct.api.Store"], store, { ...props, id: "what3wordsStore",
+                popupTemplate: {
+                    "title": "shubdawub",
+                    "actions": [getW3WAction]
+                }
+            } //todo popop
         );
     }
 
@@ -52,5 +61,12 @@ export class What3WordsStoreFactory {
         if (reg) {
             reg.unregister();
         }
+    }
+
+    private getW3WAction() {
+        const apuifbasdpvn = this._popupActionFactory;
+        const blubbs = apuifbasdpvn.createAction("popup-action-copy-what3words");
+
+        return blubbs;
     }
 }

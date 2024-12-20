@@ -57,14 +57,22 @@
                 {
                     "name": "_model",
                     "providing": "dn_what3words.What3WordsModel"
+                },
+                {
+                    "name": "_popupActionFactory",
+                    "providing": "dn_what3words.PopupActionCopyWhat3WordsFactory"
                 }
             ]
         },
         {
-            "name": "What3WordsPopupAction",
+            "name": "What3WordsOpenPopupMapAction",
             "provides": "map-actions.Action",
             "immediate": true,
-            "properties": {},
+            "properties": {
+                "popupActionTitle": "temp",
+                "iconClass": "icon-what3words"
+            },
+            "propertiesConstructor": true,
             "references": [
                 {
                     "name": "_mapWidgetModel",
@@ -89,8 +97,8 @@
             "propertiesConstructor": true,
             "properties": {
                 "id": "popupToggleTool",
-                "title": "${tool.title}",
-                "tooltip": "${tool.tooltip}",
+                "title": "${ui.tool.title}",
+                "tooltip": "${ui.tool.tooltip}",
                 "toolRole": "toolset",
                 "iconClass": "",
                 "togglable": true,
@@ -124,7 +132,8 @@
         {
             "name": "PopupActionCopyWhat3WordsFactory",
             "provides": [
-                "popups.ActionFactory"
+                "popups.ActionFactory",
+                "dn_what3words.PopupActionCopyWhat3WordsFactory"
             ]
         }
     ]

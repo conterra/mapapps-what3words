@@ -26,13 +26,12 @@
     background-color: transparent !important;
 }
 
-.ctAppRoot .ctTool_popupToggleTool {
+.ctAppRoot .dijitHover .ctTool_popupToggleTool,
+.ctAppRoot .ctActiveTool .ctTool_popupToggleTool {
     margin: 0;
+    border: 2px #fff solid;
+    border-radius: 5px;
 }
-
-/*.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode {*/
-/*    background-color: #fff !important;*/
-/*}*/
 
 .ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .ctToolIcon_popupToggleTool {
     height: 47px;
@@ -47,47 +46,12 @@
     color: #45474d;
 }
 
-.ctAppRoot .dijitHover .ctTool_popupToggleTool  .dijitButtonNode .dijitButtonText  {
+.ctAppRoot .dijitHover .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText,
+.ctAppRoot .ctActiveTool .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText {
     display: block;
     font-size: 15px;
     color: #fff;
 }
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-  }
-
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 80px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 105%;
-    opacity: 0;
-    transition: opacity 0.3s;
-
-  }
-
-  .tooltip .tooltiptext::after {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    right: 100%; /* To the left of the tooltip */
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent #555 transparent transparent;
-    height: 10px;
-  }
 
 .ctAppRoot .esri-popup__main-container {
     cursor: default;
