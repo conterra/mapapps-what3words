@@ -38,16 +38,18 @@ export class What3WordsStoreFactory {
 
         const store = new What3WordsStore(props, model, _i18n); // TODO: Typing
         // todo action hier
+        store.popupTemplate = {
+            "title": "shubdawub",
+            "content": "Hallooooo",
+            "customActions": ["popup-action-copy-what3words"]
+        };
 
         const getW3WAction = this.getW3WAction();
 
         this._registration = this._componentContext.getBundleContext().registerService(
-            ["ct.api.Store"], store, { ...props, id: "what3wordsStore",
-                popupTemplate: {
-                    "title": "shubdawub",
-                    "actions": [getW3WAction]
-                }
-            } //todo popop
+            ["ct.api.Store"], store, {
+            ...props, id: "what3wordsStore"
+        } //todo popop
         );
     }
 
