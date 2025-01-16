@@ -14,27 +14,24 @@
 /// limitations under the License.
 ///
 
-import { InjectedReference } from "apprt-core/InjectedReference";
-
 export class PopupActionCopyWhat3WordsFactory {
-    private _properties: InjectedReference<any>;
 
     public createAction(type: string): any {
-        const properties = this._properties;
+        const that = this;
+        const i18n = that._i18n.get().ui;
 
         return {
             id: type,
             type: "button",
-            title: "test",
-            className: "icon-star",
+            title: i18n.popup.button,
+            className: "icon-editor-copy",
 
             trigger(context: any): void {
-                console.info("Triggered");
-
+                that.copyText(context.features[0]);
             },
 
             isVisibleForFeature(feature: __esri.Feature): boolean {
-                return true;
+                return (feature?.attributes?.title) ? true : false;
             }
         };
     }
@@ -44,15 +41,7 @@ export class PopupActionCopyWhat3WordsFactory {
     }
 
 
-    private copyText(): void {
-        const copyText = document.getElementsByClassName("popupTitle")[0];
-        navigator.clipboard.writeText(copyText.textContent);
-        const tooltip = document.getElementsByClassName("tooltiptext")[0];
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
-        setTimeout(() => {
-            tooltip.style.visibility = "hidden";
-            tooltip.style.opacity = "0";
-        }, 5000);
+    public copyText(feature: __esri.Feature): void {
+        navigator.clipboard.writeText(`///${feature?.attributes?.title}`);
     }
 }
