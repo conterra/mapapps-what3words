@@ -30,23 +30,10 @@ export class What3WordsOpenPopupMapAction {
     }
 
     async trigger(event: any): Promise<void> {
-        const model = this._what3WordsModel;
         const actionService = this._actionService;
 
         if (!event.source) { return; }
         if (event.source.id !== "what3wordsStore" || !event.items || event.items.length === 0) { return; }
-        // event.source.popupTemplate = {
-        //     "title": `///${event.items[0].title}`,
-        //     "popupType": "default",
-        //     "content": [
-        //         {
-        //             "type": "text",
-        //             "text": "Dieser Baum wurde im Jahr <strong>{pflanzjahr}</strong> gepflanzt."
-        //         }
-        //     ]
-        //     // ,
-        //     // "customActions": ["popup-action-copy-what3words"] //TODO: Implement
-        // };
 
         const item = event.items[0];
         actionService.trigger(["zoomto", "openpopup"], {

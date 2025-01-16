@@ -36,10 +36,15 @@ export class What3WordsStoreFactory {
 
         props.apiKey = model.get("apiKey");
 
-        const store = new What3WordsStore(props, model, _i18n); // TODO: Typing
+        const store = new What3WordsStore(props, model, _i18n);
         store.popupTemplate = {
             "title": "///{title}",
-            "content": "{geometry.x}", //TODO get coords
+            "content": [
+                {
+                    "type": "text",
+                    "text": "///{geometry.x}"
+                }
+            ],
             "customActions": ["popup-action-copy-what3words"]
         };
 

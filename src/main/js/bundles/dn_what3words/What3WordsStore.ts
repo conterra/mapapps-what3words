@@ -22,27 +22,25 @@ import Point from "esri/geometry/Point";
 import { What3WordsQueryResult, What3WordsQueryReturnObject } from "./api";
 import { QueryOptions, QueryResult } from "store-api/api/Store";
 import What3WordsModel from "./What3WordsModel";
-import { InjectedReference } from "apprt-core/InjectedReference";
-import { Messages } from "./nls/bundle";
+
+import type { InjectedReference } from "apprt-core/InjectedReference";
 
 // eslint-disable-next-line max-len
 const regex = /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i;
 
 export class What3WordsStore {
-    private _i18n: Messages;
     private key: string;
     private id: string;
     private _model: InjectedReference<typeof What3WordsModel>;
 
-    constructor(properties: Record<string, any>, _model: typeof What3WordsModel, _i18n: Messages) {
+    constructor(properties: Record<string, any>, _model: typeof What3WordsModel) {
         this.key = properties.apiKey;
         this.id = "what3wordsStore";
         this._model = _model;
-        this._i18n = _i18n;
     }
 
     public get(id: string, options: any): Promise<What3WordsQueryReturnObject> {
-        const query = {} as {id: ComplexQueryOptions};
+        const query = {} as { id: ComplexQueryOptions };
         query["id"] = { $eq: id };
         options.isGet = true;
         return when(this.query(query, options), function (features) {
@@ -70,7 +68,6 @@ export class What3WordsStore {
             value = value.slice(3);
         }
 
-        //no 3 word address
         if (!regex.test(value)) {
             return this.emptyResult();
         }
@@ -86,7 +83,6 @@ export class What3WordsStore {
         let targetUrl = model.suggestUrl;
         let callback = this.suggestCallback;
 
-        //if this.query() was called from this.get(), otherwise it is a suggest query
         if (queryopts.isGet === true) {
             queryParams.words = value;
             targetUrl = model.coordsUrl;
@@ -110,7 +106,7 @@ export class What3WordsStore {
         response.suggestions.forEach((suggest) => {
             results.push({
                 id: suggest.words,
-                title: `///${suggest.words} (${suggest.nearestPlace || this._i18n.noPlace})` // TODO get i18n to work
+                title: `///${suggest.words} ${suggest.nearestPlace}`
             });
         });
 
