@@ -14,15 +14,17 @@
 /// limitations under the License.
 ///
 
-import { InjectedReference } from "apprt-core/InjectedReference";
-import { Config } from "./module";
+import type { InjectedReference } from "apprt-core/InjectedReference";
+import type { ActionService } from "map-actions/api";
+import type { Store } from "store-api/api";
+import type { Config } from "./module";
 
 export class What3WordsOpenPopupMapAction {
     private id: string;
     private immediate: boolean;
-    private _what3WordsStore: InjectedReference<any>; //TODO: Improve
-    private _what3WordsModel: InjectedReference<typeof Config>; //TODO: Improve
-    private _actionService: InjectedReference<any>; //TODO: Improve
+    private _what3WordsStore: InjectedReference<Store>;
+    private _what3WordsModel: InjectedReference<typeof Config>;
+    private _actionService: InjectedReference<ActionService>;
 
     constructor() {
         this.id = "what3words-open-popup";
@@ -36,7 +38,7 @@ export class What3WordsOpenPopupMapAction {
         if (event.source.id !== "what3wordsStore" || !event.items || event.items.length === 0) { return; }
 
         const item = event.items[0];
-        actionService.trigger(["zoomto", "openpopup"], {
+        actionService!.trigger(["zoomto", "openpopup"], {
             "items": [item],
             "zoomto-point-scale": 1000,
             "source": event.source

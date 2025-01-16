@@ -71,6 +71,7 @@ export class MapClickPopupHandler {
                         location: event.mapPoint,
                         content: `${i18n.popup.coordinatePrefix}: [${lon}, ${lat}]`
                     });
+                    // TODO: Add action to popup
                 }
             ).catch((e) => {
                 console.warn(`${i18n.popup.geocodingErrorPrefix}: ${e?.response?.data?.error?.message}`);

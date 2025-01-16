@@ -43,9 +43,7 @@ export class What3WordsStore {
         const query = {} as { id: ComplexQueryOptions };
         query["id"] = { $eq: id };
         options.isGet = true;
-        return when(this.query(query, options), function (features) {
-            return features[0];
-        });
+        return when(this.query(query, options), features => features[0]);
     }
 
     public getIdentity(item: What3WordsQueryReturnObject): string {

@@ -39,10 +39,20 @@ export class What3WordsStoreFactory {
         const store = new What3WordsStore(props, model, _i18n);
         store.popupTemplate = {
             "title": "///{title}",
-            "content": [
+            "content": [ //TODO: Add geometry to popup
                 {
-                    "type": "text",
-                    "text": "///{geometry.x}"
+                    type: "fields",
+                    fieldInfos: [
+                        {
+                            "fieldName": "title"
+                        },
+                        {
+                            "fieldName": "id"
+                        },
+                        {
+                            "fieldName": "geometry"
+                        }
+                    ]
                 }
             ],
             "customActions": ["popup-action-copy-what3words"]
