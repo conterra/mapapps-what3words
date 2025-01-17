@@ -16,14 +16,10 @@
 
 import type { InjectedReference } from "apprt-core/InjectedReference";
 import type { ActionService } from "map-actions/api";
-import type { Store } from "store-api/api";
-import type { Config } from "./module";
 
 export class What3WordsOpenPopupMapAction {
     private id: string;
     private immediate: boolean;
-    private _what3WordsStore: InjectedReference<Store>;
-    private _what3WordsModel: InjectedReference<typeof Config>;
     private _actionService: InjectedReference<ActionService>;
 
     constructor() {

@@ -41,3 +41,27 @@ export interface What3WordsQueryResult {
     }
     words: string;
 }
+
+export interface What3WordsResult {
+    geometry: __esri.Point;
+    roundedLatitude: number;
+    roundedLongitude: number;
+    words: string;
+}
+
+export interface What3WordsResults {
+    results: What3WordsResult[];
+    total: number;
+}
+
+export interface What3WordsSuggestionItem {
+    country: string;
+    language: string;
+    nearestPlace: string;
+    rank: number;
+    words: string;
+}
+
+export interface What3WordsSuggestionItems {
+    suggestions: What3WordsSuggestionItem[];
+}

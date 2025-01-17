@@ -14,23 +14,23 @@
 /// limitations under the License.
 ///
 
-import QueryResults from "store-api/QueryResults";
 import apprt_request from "apprt-request";
 import when from "apprt-core/when";
-import ComplexQuery, { ComplexQueryOptions } from "store-api/ComplexQuery";
 import Point from "esri/geometry/Point";
-import { What3WordsQueryResult, What3WordsQueryReturnObject } from "./api";
-import { QueryOptions, QueryResult } from "store-api/api/Store";
-import What3WordsModel from "./What3WordsModel";
-import { SyncInMemoryStore, ConstructorOptions } from "store-api/InMemoryStore";
+import ComplexQuery from "store-api/ComplexQuery";
+import QueryResults from "store-api/QueryResults";
+import { QueryResult, type QueryOptions } from "store-api/api";
+import { SyncInMemoryStore, type ConstructorOptions } from "store-api/InMemoryStore";
 
 import type { InjectedReference } from "apprt-core/InjectedReference";
+import type What3WordsModel from "./What3WordsModel";
+import type { Messages } from "./nls/bundle";
+import type { I18N } from "apprt/api";
+import { What3WordsQueryResult, What3WordsQueryReturnObject, What3WordsResults, What3WordsSuggestionItems } from "./api";
 
-// eslint-disable-next-line max-len
-const regex = /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i;
 
 export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, string> {
-    private _i18n: InjectedReference<MessagesReference>;
+    private _i18n: InjectedReference<I18N<Messages>>;
     private _model: InjectedReference<typeof What3WordsModel>;
 
     public activate(): void {
@@ -38,7 +38,7 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
     }
 
     public initComponent(): void {
-        const i18n = this._i18n.get().ui;
+        const i18n = this._i18n!.get().ui;
 
         this.popupTemplate = {
             title: "///{words}",
@@ -90,6 +90,9 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
     }
 
     private handleInputs(query: any, queryopts: QueryOptions): string | [] {
+        // eslint-disable-next-line max-len
+        const regex = /^\/{0,}[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}[・.。][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]{1,}$/i;
+
         const ast = ComplexQuery.parse(query, queryopts).ast;
         let value = ast.root().v;
 
@@ -103,12 +106,10 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
 
         return value;
     }
-    private suggestCallback(response) {
-        const results = [];
+    private suggestCallback(response: What3WordsSuggestionItems): { words: string }[] & { total: number } {
+        const results: { words: string }[] & { total: number } = [];
         response.suggestions.forEach((suggest) => {
             results.push({
-                id: suggest.words,
-                title: `///${suggest.words} ${suggest.nearestPlace}`,
                 words: suggest.words
             });
         });
@@ -117,7 +118,7 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
         return results;
     }
 
-    private getCallback(response: What3WordsQueryResult) {
+    private getCallback(response: What3WordsQueryResult): What3WordsResults {
         const results = [];
 
         results.push({
@@ -127,7 +128,9 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
             geometry: new Point({
                 longitude: response.coordinates.lng,
                 latitude: response.coordinates.lat,
-                wkid: 4326
+                spatialReference: {
+                    wkid: 4326
+                }
             })
         });
 
