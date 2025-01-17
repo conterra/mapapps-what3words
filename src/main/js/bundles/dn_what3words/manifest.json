@@ -37,20 +37,40 @@
             }
         },
         {
-            "name": "What3WordsStoreFactory",
+            "name": "What3WordsStore",
+            "provides": [
+                "ct.api.Store"
+            ],
+            "propertiesConstructor": true,
             "properties": {
+                "id": "what3wordsstore",
+                "title": "${ui.store.title}",
+                "description": "${ui.store.description}",
                 "useIn": [
                     "search"
                 ],
-                "omniSearchTypingDelay": 200,
-                "omniSearchPageSize": 20,
-                "omniSearchSearchAttr": "title",
-                "omniSearchDefaultLabel": "///",
-                "omniSearchPriority": 9999,
-                "omniSearchAutoActivate": true,
-                "-filterQuery": {},
-                "-filterOptions": {
-                    "suggestContains": true
+                "searchAttribute": "words",
+                "searchLabel": "words",
+                "idProperty": "words",
+                "metadata": {
+                    "supportsGeometry": true,
+                    "fields": [
+                        {
+                            "title": "Words",
+                            "name": "words",
+                            "type": "string"
+                        },
+                        {
+                            "title": "Latitude",
+                            "name": "roundedLatitude",
+                            "type": "number"
+                        },
+                        {
+                            "title": "Longitude",
+                            "name": "roundedLongitude",
+                            "type": "number"
+                        }
+                    ]
                 }
             },
             "references": [

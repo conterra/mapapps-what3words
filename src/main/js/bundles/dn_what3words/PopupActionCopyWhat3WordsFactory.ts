@@ -31,7 +31,7 @@ export class PopupActionCopyWhat3WordsFactory {
             },
 
             isVisibleForFeature(feature: __esri.Feature): boolean {
-                return (feature?.attributes?.title) ? true : false;
+                return (feature?.attributes?.words) ? true : false;
             }
         };
     }
@@ -40,8 +40,7 @@ export class PopupActionCopyWhat3WordsFactory {
         return ["popup-action-copy-what3words"];
     }
 
-
     public copyText(feature: __esri.Feature): void {
-        navigator.clipboard.writeText(`///${feature?.attributes?.title}`);
+        navigator.clipboard.writeText(`///${feature?.attributes?.words}`);
     }
 }

@@ -35,7 +35,7 @@ export class What3WordsOpenPopupMapAction {
         const actionService = this._actionService;
 
         if (!event.source) { return; }
-        if (event.source.id !== "what3wordsStore" || !event.items || event.items.length === 0) { return; }
+        if (event.source.id !== "what3wordsstore" || !event.items || event.items.length === 0) { return; }
 
         const item = event.items[0];
         actionService!.trigger(["zoomto", "openpopup"], {

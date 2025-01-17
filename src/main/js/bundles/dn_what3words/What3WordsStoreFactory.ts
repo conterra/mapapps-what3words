@@ -59,7 +59,7 @@ export class What3WordsStoreFactory {
         };
 
         this._registration = this._componentContext.getBundleContext().registerService(
-            ["ct.api.Store"], store, { ...props, id: "what3wordsStore" }
+            ["ct.api.Store"], store, { ...props, id: "what3wordsstore" }
         );
     }
 

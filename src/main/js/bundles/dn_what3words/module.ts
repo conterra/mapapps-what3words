@@ -15,7 +15,7 @@
 ///
 
 export { default as Config } from "./What3WordsModel";
+export { What3WordsStore } from "./What3WordsStore";
 export { MapClickPopupHandler } from "./MapClickPopupHandler";
-export { What3WordsStoreFactory } from "./What3WordsStoreFactory";
 export { What3WordsOpenPopupMapAction } from "./What3WordsOpenPopupMapAction";
 export { PopupActionCopyWhat3WordsFactory } from "./PopupActionCopyWhat3WordsFactory";

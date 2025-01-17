@@ -21,6 +21,10 @@ const i18n = {
         ui: {
             missingApiKeyWarning: "API key for what3words is empty",
             noPlace: "No Place",
+            store: {
+                title: "What3Words Store",
+                description: "Store for What3Words addresses"
+            },
             tool: {
                 tooltip: "Identify w3w address in the map",
                 title: "Identify w3w address in the map"
