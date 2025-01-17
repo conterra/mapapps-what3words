@@ -16,6 +16,7 @@
 
 import apprt_request from "apprt-request";
 import Locale from "apprt-core/Locale";
+import Graphic from "esri/Graphic";
 
 import type { InjectedReference } from "apprt-core/InjectedReference";
 import type { Messages } from "./nls/bundle";
@@ -50,7 +51,7 @@ export class MapClickPopupHandler {
         const key = w3wModel.apiKey;
         const coordsUrl = w3wModel.what3wordsUrl;
 
-        this._clickHandle = view.on("click", (event: {mapPoint: __esri.Point}) => {
+        this._clickHandle = view.on("click", (event: { mapPoint: __esri.Point }) => {
             if (key === "") {
                 console.warn(i18n.missingApiKeyWarning);
                 return;
@@ -63,20 +64,27 @@ export class MapClickPopupHandler {
 
             apprt_request(coordsUrl, { query: queryParams }).then(
                 (response) => {
-                    view.popup.title = `///${response.words}`;
-                    const lat = Math.round(latitude * 1000) / 1000;
-                    const lon = Math.round(longitude * 1000) / 1000;
-
                     view.popup.open({
-                        location: event.mapPoint,
-                        content: `${i18n.popup.coordinatePrefix}: [${lon}, ${lat}]`
+                        features: [
+                            new Graphic({
+                                geometry: event.mapPoint,
+                                attributes: {
+                                    words: response.words,
+                                    roundedLatitude: Math.round(latitude * 1000) / 1000,
+                                    roundedLongitude: Math.round(longitude * 1000) / 1000
+                                },
+                                popupTemplate: {
+                                    title: "///{words}",
+                                    customActions: ["popup-action-copy-what3words"],
+                                    content: `${i18n.popup.coordinatePrefix}: [{roundedLatitude}, {roundedLongitude}]`
+                                } as __esri.PopupTemplate & { customActions: string[] }
+                            })
+                        ]
                     });
-                    // TODO: Add action to popup
                 }
             ).catch((e) => {
                 console.warn(`${i18n.popup.geocodingErrorPrefix}: ${e?.response?.data?.error?.message}`);
             });
-
         });
     }
 
