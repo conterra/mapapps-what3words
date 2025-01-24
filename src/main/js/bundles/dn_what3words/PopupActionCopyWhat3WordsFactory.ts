@@ -17,6 +17,7 @@
 export class PopupActionCopyWhat3WordsFactory {
 
     public createAction(type: string): any {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const that = this;
         const i18n = that._i18n.get().ui;
 
