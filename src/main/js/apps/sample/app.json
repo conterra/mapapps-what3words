@@ -5,15 +5,15 @@
             "bundles"
         ],
         "allowedBundles": [
-            "system@^4.6.2",
-            "splashscreen@^4.6.2",
-            "templatelayout@^4.6.2",
-            "template-seasons@^4.6.2",
-            "theme-autumn@^4.6.2",
-            "toolset@^4.6.2",
-            "map-init@^4.6.2",
-            "omnisearch@^4.6.2",
-            "banner@^4.6.2",
+            "system",
+            "splashscreen",
+            "templatelayout",
+            "template-seasons",
+            "theme-autumn",
+            "toolset",
+            "map-init",
+            "search-ui",
+            "banner",
             "basemapswitcher",
             "locator-store",
             "dn_welcome",
@@ -21,6 +21,17 @@
         ]
     },
     "bundles": {
+        "search-ui": {
+            "Config": {
+                "actions": [
+                    "what3words-open-popup",
+                    "zoomto",
+                    "highlight",
+                    "openpopup"
+                ],
+                "zoomto-point-scale": 1000
+            }
+        },
         "banner": {
             "BannerWidget": {
                 "label": "Developer Network",
@@ -110,9 +121,9 @@
             "ToolsetManager": {
                 "toolsets": [
                     {
-                        "id": "popup",
+                        "id": "what3wordstoolset",
                         "tools": [
-                            "popupToggleTool"
+                            "what3wordstool"
                         ],
                         "container": "map",
                         "windowType": "fixed",
