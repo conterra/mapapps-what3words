@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.ctAppRoot.ctActiveTool_popupToggleTool .esri-view-root {
+.ctAppRoot.ctActiveTool_what3wordstool .esri-view-root {
     cursor: crosshair;
 }
 
@@ -26,28 +26,28 @@
     background-color: transparent !important;
 }
 
-.ctAppRoot .dijitHover .ctTool_popupToggleTool,
-.ctAppRoot .ctActiveTool .ctTool_popupToggleTool {
+.ctAppRoot .dijitHover .ctTool_what3wordstool,
+.ctAppRoot .ctActiveTool .ctTool_what3wordstool {
     margin: 0;
     border: 2px #fff solid;
     border-radius: 5px;
 }
 
-.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .ctToolIcon_popupToggleTool {
+.ctAppRoot .ctTool_what3wordstool .dijitButtonNode .ctToolIcon_what3wordstool {
     height: 47px;
     width: 47px;
     background: url(./../images/w3w_logo.svg) no-repeat center;
     background-size: contain;
 }
 
-.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText {
+.ctAppRoot .ctTool_what3wordstool .dijitButtonNode .dijitButtonText {
     display: block;
     font-size: 15px;
     color: #45474d;
 }
 
-.ctAppRoot .dijitHover .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText,
-.ctAppRoot .ctActiveTool .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText {
+.ctAppRoot .dijitHover .ctTool_what3wordstool .dijitButtonNode .dijitButtonText,
+.ctAppRoot .ctActiveTool .ctTool_what3wordstool .dijitButtonNode .dijitButtonText {
     display: block;
     font-size: 15px;
     color: #fff;

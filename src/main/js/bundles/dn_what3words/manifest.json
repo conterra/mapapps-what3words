@@ -109,14 +109,14 @@
             ]
         },
         {
-            "name": "PopupToggleTool",
+            "name": "WhatThreeWordsToggleTool",
             "impl": "ct/tools/Tool",
             "provides": [
                 "ct.tools.Tool"
             ],
             "propertiesConstructor": true,
             "properties": {
-                "id": "popupToggleTool",
+                "id": "what3wordstool",
                 "title": "${ui.tool.title}",
                 "tooltip": "${ui.tool.tooltip}",
                 "toolRole": "toolset",
