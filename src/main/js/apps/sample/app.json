@@ -26,7 +26,6 @@
                 "actions": [
                     "what3words-open-popup",
                     "zoomto",
-                    "highlight",
                     "openpopup"
                 ],
                 "zoomto-point-scale": 1000
