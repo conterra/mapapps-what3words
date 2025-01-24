@@ -110,7 +110,7 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
         const results: { words: string }[] & { total: number } = [];
         response.suggestions.forEach((suggest) => {
             results.push({
-                words: suggest.words
+                words: `///${suggest.words}`
             });
         });
 
