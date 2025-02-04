@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ This build file, configures information for the rollup-build task:
+ See: https://www.npmjs.com/package/ct-mapapps-gulp-js#user-content-rollup-build
+*/
 module.exports = {
-    root: ({
-        tool: {
-            tooltip: "Identify w3w address in the map",
-            title: "Identify w3w address in the map"
-        },
-        popup: {
-            button: "Copy Adress",
-            tooltip: "Copied"
-        }
-    }),
-    de: true
+    // normally the type should be "bundle"
+    type: "bundle",
+    // list all files, which should stay after the build
+    // In this case only the "module.js" is the remaining artifact, all other files will be integrated into this file.
+    entryPoints: ["./module"]
 };

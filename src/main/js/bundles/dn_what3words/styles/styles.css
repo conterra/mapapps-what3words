@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.ctAppRoot.ctActiveTool_popupToggleTool .esri-view-root {
+.ctAppRoot.ctActiveTool_what3wordstool .esri-view-root {
     cursor: crosshair;
 }
 
@@ -26,68 +26,32 @@
     background-color: transparent !important;
 }
 
-.ctAppRoot .ctTool_popupToggleTool {
+.ctAppRoot .dijitHover .ctTool_what3wordstool,
+.ctAppRoot .ctActiveTool .ctTool_what3wordstool {
     margin: 0;
+    border: 2px #fff solid;
+    border-radius: 5px;
 }
 
-/*.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode {*/
-/*    background-color: #fff !important;*/
-/*}*/
-
-.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .ctToolIcon_popupToggleTool {
+.ctAppRoot .ctTool_what3wordstool .dijitButtonNode .ctToolIcon_what3wordstool {
     height: 47px;
     width: 47px;
     background: url(./../images/w3w_logo.svg) no-repeat center;
     background-size: contain;
 }
 
-.ctAppRoot .ctTool_popupToggleTool .dijitButtonNode .dijitButtonText {
+.ctAppRoot .ctTool_what3wordstool .dijitButtonNode .dijitButtonText {
     display: block;
     font-size: 15px;
     color: #45474d;
 }
 
-.ctAppRoot .dijitHover .ctTool_popupToggleTool  .dijitButtonNode .dijitButtonText  {
+.ctAppRoot .dijitHover .ctTool_what3wordstool .dijitButtonNode .dijitButtonText,
+.ctAppRoot .ctActiveTool .ctTool_what3wordstool .dijitButtonNode .dijitButtonText {
     display: block;
     font-size: 15px;
     color: #fff;
 }
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-  }
-
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 80px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 105%;
-    opacity: 0;
-    transition: opacity 0.3s;
-
-  }
-
-  .tooltip .tooltiptext::after {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    right: 100%; /* To the left of the tooltip */
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent #555 transparent transparent;
-    height: 10px;
-  }
 
 .ctAppRoot .esri-popup__main-container {
     cursor: default;
