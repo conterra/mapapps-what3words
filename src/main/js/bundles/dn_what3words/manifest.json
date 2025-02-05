@@ -1,6 +1,6 @@
 {
     "name": "dn_what3words",
-    "version": "2.0.0",
+    "version": "2.0.1-SNAPSHOT",
     "title": "what3words",
     "description": "what3words",
     "productName": "devnet-mapapps-what3words",
