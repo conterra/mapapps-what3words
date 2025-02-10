@@ -17,13 +17,8 @@
     cursor: crosshair;
 }
 
-.ctAppRoot .v-image__image--cover {
-    width: 250px !important;
-    height: 250px !important;
-}
-
-.ctAppRoot .dijitDialogPaneContent {
-    background-color: transparent !important;
+.ctAppRoot .what3wordstoolset .dijitDialogPaneContent {
+    background-color: transparent;
 }
 
 .ctAppRoot .dijitHover .ctTool_what3wordstool,
