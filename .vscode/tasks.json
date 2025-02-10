@@ -13,7 +13,7 @@
             "detail": "Run map.apps for Developers development server",
             "type": "shell",
             "command": "mvn",
-            "args": ["clean", "compile", "-Denv=dev", "'-Dlocal.configfile=./build.properties'", "-Pinclude-mapapps-deps"],
+            "args": ["clean", "compile", "-Denv=dev", "-Dlocal.configfile=./build.properties", "-Pinclude-mapapps-deps"],
             "group": "build",
             "isBackground": true
         },

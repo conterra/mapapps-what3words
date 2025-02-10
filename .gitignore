@@ -15,3 +15,10 @@
 /.externalToolBuilders/
 /package-lock.json
 /gulpfile.overrides.js
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
