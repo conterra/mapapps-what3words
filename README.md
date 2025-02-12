@@ -17,8 +17,6 @@ This map.apps bundle will provide two integration points for the service:
 
 To be able to use this bundle, a development API key is required. It can be obtained for free from [here](https://accounts.what3words.com/register) 
 
-## Sample App
-[https://demos.conterra.de/mapapps/resources/apps/downloads_what3words/index.html](https://demos.conterra.de/mapapps/resources/apps/downloads_what3words/index.html)
 
 ## Requirements
 * map.apps 4.6.2 (or above)
