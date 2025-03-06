@@ -27,6 +27,7 @@ export class MapClickPopupHandler {
     private _clickHandle?: IHandle;
     private _mapWidgetModel: InjectedReference<any>;
     private _what3WordsModel: InjectedReference<any>;
+    private _coordinateTransformer: InjectedReference<any>;
 
     public activateTool(): void {
         const i18n = this._i18n!.get().ui;
@@ -51,15 +52,17 @@ export class MapClickPopupHandler {
         const key = w3wModel.apiKey;
         const coordsUrl = w3wModel.what3wordsUrl;
 
-        this._clickHandle = view.on("click", (event: { mapPoint: __esri.Point }) => {
+        this._clickHandle = view.on("click", async (event: { mapPoint: __esri.Point }) => {
             if (key === "") {
                 console.warn(i18n.missingApiKeyWarning);
                 return;
             }
 
             const currentLang = Locale.getCurrent().getLocaleString();
-            const latitude = event.mapPoint.latitude;
-            const longitude = event.mapPoint.longitude;
+            const point = await this._coordinateTransformer.transform(event.mapPoint, 3857);
+
+            const latitude = point.latitude;
+            const longitude = point.longitude;
             const queryParams = { key, coordinates: `${latitude},${longitude}`, language: currentLang };
 
             apprt_request(coordsUrl, { query: queryParams }).then(

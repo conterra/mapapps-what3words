@@ -146,6 +146,10 @@
                 {
                     "name": "_what3WordsModel",
                     "providing": "dn_what3words.What3WordsModel"
+                },
+                {
+                    "name": "_coordinateTransformer",
+                    "providing": "ct.api.coordinatetransformer.CoordinateTransformer"
                 }
             ]
         },
