@@ -1,3 +1,7 @@
+[![devnet-bundle-snapshot](https://github.com/conterra/mapapps-what3words/actions/workflows/devnet-bundle-snapshot.yml/badge.svg)](https://github.com/conterra/mapapps-what3words/actions/workflows/devnet-bundle-snapshot.yml)
+![Static Badge](https://img.shields.io/badge/requires_map.apps-4.20.0-e5e5e5?labelColor=%233E464F&logoColor=%23e5e5e5)
+![Static Badge](https://img.shields.io/badge/tested_for_map.apps-4.20.0-%20?labelColor=%233E464F&color=%232FC050)
+
 # what3words Bundle
 
 This bundle will integrate [what3words](https://what3words.com/de/) into map.apps.
@@ -21,7 +25,7 @@ To be able to use this bundle, a development API key is required. It can be obta
 https://demos.conterra.de/mapapps/resources/apps/internal_demo_what3words/index.html
 
 ## Requirements
-* map.apps 4.6.2 (or above)
+* map.apps 4.20.0 (or above)
 * a what3words API developer key which can be retrieved from [here](https://accounts.what3words.com/register)
 
 ## Installation Guide
