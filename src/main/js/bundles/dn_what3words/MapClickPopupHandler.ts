@@ -14,9 +14,9 @@
 /// limitations under the License.
 ///
 
-import apprt_request from "apprt-request";
+import { apprtFetchJson } from "apprt-fetch";
 import Locale from "apprt-core/Locale";
-import Graphic from "esri/Graphic";
+import Graphic from "@arcgis/core/Graphic";
 
 import type { InjectedReference } from "apprt-core/InjectedReference";
 import type { Messages } from "./nls/bundle";
@@ -65,7 +65,7 @@ export class MapClickPopupHandler {
             const longitude = point.longitude;
             const queryParams = { key, coordinates: `${latitude},${longitude}`, language: currentLang };
 
-            apprt_request(coordsUrl, { query: queryParams }).then(
+            apprtFetchJson(coordsUrl, { query: queryParams }).then(
                 (response) => {
                     view.popup.open({
                         features: [

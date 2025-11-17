@@ -9,12 +9,12 @@
         "bundle"
     ],
     "dependencies": {
-        "esri": "^4.10.1",
-        "apprt-core": "^4.6.2",
-        "apprt-binding": "^4.6.2",
-        "apprt-request": "^4.6.2",
-        "ct": "^4.6.2",
-        "store-api": "^4.6.2"
+        "@arcgis/core": "^4.33.0",
+        "apprt-core": "^4.20.0",
+        "apprt-binding": "^4.20.0",
+        "apprt-fetch": "^4.20.0",
+        "ct": "^4.20.0",
+        "store-api": "^4.20.0"
     },
     "cssThemesExtension": [
         {

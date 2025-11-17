@@ -14,9 +14,9 @@
 /// limitations under the License.
 ///
 
-import apprt_request from "apprt-request";
+import { apprtFetchJson } from "apprt-fetch";
 import when from "apprt-core/when";
-import Point from "esri/geometry/Point";
+import Point from "@arcgis/core/geometry/Point";
 import ComplexQuery from "store-api/ComplexQuery";
 import QueryResults from "store-api/QueryResults";
 import { QueryResult, type QueryOptions } from "store-api/api";
@@ -68,7 +68,7 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
         let promise;
         if (queryopts.isGet === true) {
             promise = when(
-                apprt_request(model.coordsUrl, { query: { key, words: inputWords } }).then(
+                apprtFetchJson(model.coordsUrl, { query: { key, words: inputWords } }).then(
                     (response) => this.getCallback(response)
                 ).catch((e) => {
                     console.warn(`"Geocoding failed: ${e.response.data.error.message}`);
@@ -77,7 +77,7 @@ export class What3WordsStore extends SyncInMemoryStore<ConstructorOptions<any>, 
             );
         } else {
             promise = when(
-                apprt_request(model.suggestUrl, { query: { key, input: inputWords } }).then(
+                apprtFetchJson(model.suggestUrl, { query: { key, input: inputWords } }).then(
                     (response) => this.suggestCallback(response)
                 ).catch((e) => {
                     console.warn(`"Geocoding failed: ${e.response.data.error.message}`);
