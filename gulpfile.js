@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 con terra GmbH (info@conterra.de)
+ * Copyright (C) 2025 con terra GmbH (info@conterra.de)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 const gulp = require("gulp");
 const mapapps = require('ct-mapapps-gulp-js');
 const mapappsBrowserSync = require("ct-mapapps-browser-sync");
+const dotEnv = require("dotenv");
+// load .env file if it exits
+// the local dev jsregistry will lookup any @@key.property@@ expression, also as environment variable with name "KEY_PROPERTY" for replacement.
+dotEnv.config();
 
 const isProduction = process.env.NODE_ENV === "production";
 console.info(`Configuring gulp build for ${isProduction ? "production" : "development"}`);
@@ -107,6 +111,7 @@ mapappsBrowserSync.registerTask({
         npmModules: [
             "mocha",
             "chai",
+            "sinon",
             "@conterra/mapapps-mocha-runner"
         ]
     },
